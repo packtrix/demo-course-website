@@ -1,4 +1,7 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
+
+# This will be set by the app context
+db = SQLAlchemy()
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -3,10 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///courses.db'
-db = SQLAlchemy(app)
 
-# Import the Course model
-from models import Course
+from models import db
+db.init_app(app)
 
 @app.route('/')
 def home():
@@ -14,6 +13,7 @@ def home():
 
 @app.route('/courses')
 def courses():
+    from models import Course
     all_courses = Course.query.all()
     return render_template('courses.html', courses=all_courses)
 

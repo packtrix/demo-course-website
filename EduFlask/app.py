@@ -1,11 +1,6 @@
 from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///courses.db'
-
-from models import db
-db.init_app(app)
 
 @app.route('/')
 def home():
@@ -13,9 +8,7 @@ def home():
 
 @app.route('/courses')
 def courses():
-    from models import Course
-    all_courses = Course.query.all()
-    return render_template('courses.html', courses=all_courses)
+    return render_template('courses.html')
 
 @app.route('/login')
 def login_register():
